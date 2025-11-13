@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>We-Frame Climate Coordination Simulation</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.7.0/p5.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>We-Frame Climate Coordination Simulation</h1>
+            <p class="subtitle">Exploring why climate coordination is so difficult through context-switching dynamics</p>
+        </div>
+
+        <div class="main-content">
+            <div id="canvas-container"></div>
+
+            <div class="controls-panel">
+                <div id="live-metrics" class="metrics-section">
+                    <h3>Live Metrics</h3>
+                    <div class="metric-item">
+                        <span class="metric-label">Current Context:</span>
+                        <div id="currentContext" class="metric-value context-name">Loading...</div>
+                        <div id="contextLogic" class="context-logic">-</div>
+                        <div id="contextProgress" class="progress-bar-container">
+                            <div id="contextProgressFill" class="progress-bar-fill"></div>
+                        </div>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Climate Impact:</span>
+                        <span id="climateImpact" class="metric-value">0%</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Avg Climate Commitment:</span>
+                        <span id="avgCommitment" class="metric-value">0%</span>
+                        <div class="progress-bar-container">
+                            <div id="commitmentProgressFill" class="progress-bar-fill"></div>
+                        </div>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Active We-Frames:</span>
+                        <span id="activeWeFrames" class="metric-value">0</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Climate-aligned:</span>
+                        <span id="climateAligned" class="metric-value climate-color">0</span>
+                    </div>
+                    <div class="metric-item">
+                        <span class="metric-label">Paradigm Distribution:</span>
+                        <div class="paradigm-bar">
+                            <div id="greenGrowthBar" class="paradigm-segment gg-color"></div>
+                            <div id="degrowthBar" class="paradigm-segment dg-color"></div>
+                            <div id="undecidedBar" class="paradigm-segment un-color"></div>
+                        </div>
+                        <div class="paradigm-labels">
+                            <span id="ggCount">GG: 0</span>
+                            <span id="dgCount">DG: 0</span>
+                            <span id="unCount">Un: 0</span>
+                        </div>
+                    </div>
+                    <div class="metric-item climate-goal">
+                        <span class="metric-label">Climate Coordination Goal:</span>
+                        <div class="progress-bar-container large">
+                            <div id="climateGoalFill" class="progress-bar-fill"></div>
+                            <span id="climateGoalPercent" class="progress-percent">0%</span>
+                        </div>
+                        <div id="climateGoalStatus" class="goal-status">Fragmented</div>
+                    </div>
+                </div>
+
+                <h3>Interactive Controls</h3>
+
+                <div class="control-group">
+                    <label for="climateFreq">Climate Context Frequency:</label>
+                    <input type="range" id="climateFreq" min="5" max="40" value="15" step="1">
+                    <span id="climateFreqValue">15%</span>
+                </div>
+
+                <div class="control-group">
+                    <label for="frameInertia">Frame Inertia (Persistence):</label>
+                    <input type="range" id="frameInertia" min="0" max="100" value="30" step="1">
+                    <span id="frameInertiaValue">30%</span>
+                </div>
+
+                <div class="control-group">
+                    <label for="greenGrowthStrength">Green Growth Strength:</label>
+                    <input type="range" id="greenGrowthStrength" min="0" max="100" value="60" step="1">
+                    <span id="greenGrowthStrengthValue">60%</span>
+                </div>
+
+                <div class="control-group">
+                    <label for="degrowthStrength">Degrowth Strength:</label>
+                    <input type="range" id="degrowthStrength" min="0" max="100" value="60" step="1">
+                    <span id="degrowthStrengthValue">60%</span>
+                </div>
+
+                <div class="control-group">
+                    <button id="shockBtn" class="shock-btn">Trigger Climate Shock</button>
+                    <button id="resetBtn" class="reset-btn">Reset Simulation</button>
+                </div>
+
+                <div class="info-box">
+                    <h4>How to Use:</h4>
+                    <ul>
+                        <li>Watch how agents cluster differently in each context</li>
+                        <li>Notice climate commitment rising/falling with context switches</li>
+                        <li>Observe green growth (blue) vs degrowth (green) separation</li>
+                        <li>Try increasing climate context frequency to improve coordination</li>
+                        <li>Trigger shock events to see temporary mobilization</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="utils.js"></script>
+    <script src="agent.js"></script>
+    <script src="context.js"></script>
+    <script src="attractor.js"></script>
+    <script src="ui.js"></script>
+    <script src="sketch.js"></script>
+</body>
+</html>
