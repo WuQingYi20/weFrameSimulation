@@ -67,12 +67,15 @@ function draw() {
         agent.updateClimateCommitment(currentContext);
     }
 
+    // Draw attractor background gradient (subtle territory visualization with unaligned space)
+    attractorManager.drawBackgroundGradient(currentContext);
+
     // Display connections first (behind agents)
     for (let agent of agents) {
         agent.displayConnections(150);
     }
 
-    // Display attractors
+    // Display attractors (with dynamic zones)
     attractorManager.display(currentContext.name);
 
     // Display agents
@@ -80,9 +83,12 @@ function draw() {
         agent.display();
     }
 
+    // Update attractor manager
+    attractorManager.update(currentContext.name, agents);
+
     // Update UI elements (HTML-based, no display needed)
     const contextProgress = contextManager.getProgress();
-    dashboard.update(agents, currentContext, contextProgress);
+    dashboard.update(agents, currentContext, contextProgress, attractorManager);
     climateGoalIndicator.update(agents, currentContext);
 
     // Display shock indicator if active

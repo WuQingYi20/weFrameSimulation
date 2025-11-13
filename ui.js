@@ -86,9 +86,26 @@ class Dashboard {
         this.ggCountEl = document.getElementById('ggCount');
         this.dgCountEl = document.getElementById('dgCount');
         this.unCountEl = document.getElementById('unCount');
+
+        // New territory metrics elements
+        this.ggTerritoryEl = document.getElementById('ggTerritory');
+        this.dgTerritoryEl = document.getElementById('dgTerritory');
+        this.ggZoneCountEl = document.getElementById('ggZoneCount');
+        this.dgZoneCountEl = document.getElementById('dgZoneCount');
+        this.contestedZoneCountEl = document.getElementById('contestedZoneCount');
+        this.ggExposureBarEl = document.getElementById('ggExposureBar');
+        this.dgExposureBarEl = document.getElementById('dgExposureBar');
+        this.exposureRatioEl = document.getElementById('exposureRatio');
+
+        // Paradigm space elements
+        this.paradigmSpaceEl = document.getElementById('paradigmSpace');
+        this.unalignedSpaceEl = document.getElementById('unalignedSpace');
+        this.overlapSpaceEl = document.getElementById('overlapSpace');
+        this.ggExclusiveEl = document.getElementById('ggExclusive');
+        this.dgExclusiveEl = document.getElementById('dgExclusive');
     }
 
-    update(agents, currentContext, contextProgress) {
+    update(agents, currentContext, contextProgress, attractorManager) {
         // Update context info
         this.contextNameEl.textContent = currentContext.name;
         this.contextNameEl.style.color = currentContext.color;
@@ -130,6 +147,65 @@ class Dashboard {
         this.ggCountEl.textContent = `GG: ${greenGrowthCount}`;
         this.dgCountEl.textContent = `DG: ${degrowthCount}`;
         this.unCountEl.textContent = `Un: ${undecidedCount}`;
+
+        // Update territory metrics (NEW!)
+        if (attractorManager) {
+            const metrics = attractorManager.getMetrics(currentContext);
+            const zoneCounts = attractorManager.countAgentsInZones(agents);
+
+            this.ggTerritoryEl.textContent = metrics.ggTerritory + '%';
+            this.dgTerritoryEl.textContent = metrics.dgTerritory + '%';
+
+            this.ggZoneCountEl.textContent = zoneCounts.ggCount;
+            this.dgZoneCountEl.textContent = zoneCounts.dgCount;
+            this.contestedZoneCountEl.textContent = zoneCounts.contestedCount;
+
+            // Update exposure bars
+            const totalExposure = parseFloat(metrics.ggExposure) + parseFloat(metrics.dgExposure);
+            if (totalExposure > 0) {
+                const ggPercent = (parseFloat(metrics.ggExposure) / totalExposure) * 100;
+                const dgPercent = (parseFloat(metrics.dgExposure) / totalExposure) * 100;
+
+                this.ggExposureBarEl.style.width = ggPercent + '%';
+                this.dgExposureBarEl.style.width = dgPercent + '%';
+            }
+
+            this.exposureRatioEl.textContent = metrics.exposureRatio + 'x';
+
+            // Highlight if ratio is heavily skewed
+            if (parseFloat(metrics.exposureRatio) > 2.0) {
+                this.exposureRatioEl.style.color = '#FF6B6B'; // Red if heavily skewed toward GG
+            } else {
+                this.exposureRatioEl.style.color = '#4ECDC4';
+            }
+
+            // Update paradigm space metrics (THREE-ZONE MODEL)
+            this.paradigmSpaceEl.textContent = metrics.paradigmSpace + '%';
+            this.unalignedSpaceEl.textContent = metrics.unalignedSpace + '%';
+            this.overlapSpaceEl.textContent = metrics.overlapSpace + '%';
+            this.ggExclusiveEl.textContent = metrics.ggExclusiveSpace + '%';
+            this.dgExclusiveEl.textContent = metrics.dgExclusiveSpace + '%';
+
+            // Highlight unaligned space if it's majority
+            const unaligned = parseFloat(metrics.unalignedSpace);
+            if (unaligned > 50) {
+                this.unalignedSpaceEl.style.color = '#FF6B6B'; // Red if majority unaligned
+                this.unalignedSpaceEl.style.fontSize = '1.8em';
+            } else {
+                this.unalignedSpaceEl.style.color = '#888';
+                this.unalignedSpaceEl.style.fontSize = '1.5em';
+            }
+
+            // Highlight paradigm space color based on size
+            const paradigm = parseFloat(metrics.paradigmSpace);
+            if (paradigm > 60) {
+                this.paradigmSpaceEl.style.color = '#00B894'; // Green if high paradigm presence
+            } else if (paradigm < 30) {
+                this.paradigmSpaceEl.style.color = '#FF6B6B'; // Red if low paradigm presence
+            } else {
+                this.paradigmSpaceEl.style.color = '#4ECDC4'; // Default
+            }
+        }
     }
 
     countClimateWeFrames(agents) {

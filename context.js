@@ -1,7 +1,7 @@
 // Context definitions and management
 
 class Context {
-    constructor(name, duration, frequency, frameLogic, climateCompatibility, color) {
+    constructor(name, duration, frequency, frameLogic, climateCompatibility, color, overlapPotential = 0.1) {
         this.name = name;
         this.duration = duration; // in frames
         this.frequency = frequency; // 0-1
@@ -9,6 +9,7 @@ class Context {
         this.climateCompatibility = climateCompatibility; // -1 to 1
         this.color = color; // hex color
         this.colorRgb = hexToRgb(color);
+        this.overlapPotential = overlapPotential; // 0-1, how much GG and DG can overlap in this context
     }
 
     getBackgroundColor(alpha = 80) {
@@ -45,7 +46,8 @@ class ContextManager {
                 0.4,
                 "Cheap goods, convenience, personal consumption",
                 -0.5,
-                "#FF6B6B" // red
+                "#FF6B6B", // red
+                0.08 // Very low overlap - GG (green products) vs DG (anti-consumerism) rarely align
             ),
             new Context(
                 "Workplace Context",
@@ -53,7 +55,8 @@ class ContextManager {
                 0.3,
                 "Productivity, jobs, company survival, economic growth",
                 -0.3,
-                "#FFA07A" // light salmon
+                "#FFA07A", // light salmon
+                0.05 // Almost zero overlap - jobs vs job reduction are incompatible
             ),
             new Context(
                 "Community Meeting",
@@ -61,7 +64,8 @@ class ContextManager {
                 0.15,
                 "Local concerns, neighbors, community well-being",
                 0.6,
-                "#95E1D3" // light green
+                "#95E1D3", // light green
+                0.35 // Higher overlap - both support local initiatives, though for different reasons
             ),
             new Context(
                 "Climate Context",
@@ -69,7 +73,8 @@ class ContextManager {
                 0.15,
                 "Planetary concern, future generations, ecological crisis",
                 1.0,
-                "#00B894" // green
+                "#00B894", // green
+                0.25 // Moderate overlap - both care about climate, but disagree on solutions
             )
         ];
 

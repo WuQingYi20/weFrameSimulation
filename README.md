@@ -1,521 +1,424 @@
 # We-Frame Climate Coordination Simulation
-
-An interactive simulation demonstrating why climate coordination is so difficult through the lens of context-switching dynamics and We-frame fragmentation.
-
-## Core Concept
-
-This simulation visualizes how collective identity and climate commitment fragment across different social contexts, making sustained coordination nearly impossible. It demonstrates:
-
-1. **Context-dependent clustering**: Agents form different We-frames in different contexts
-2. **Climate commitment dynamics**: Commitment accumulates in climate-positive contexts but decays in climate-negative ones
-3. **Green Growth vs Degrowth tension**: Two competing climate paradigms that rarely have time to converge
-4. **Temporal fragmentation**: Climate contexts are too rare and brief for stable coordination to emerge
+**An Agent-Based Model of Context-Dependent Collective Identity Fragmentation**
 
 ---
 
-## How to Run
+## Abstract
 
-### Option 1: Using Launch Scripts (Easiest)
+This interactive simulation demonstrates why climate coordination fails despite widespread concern: collective identity is fundamentally **context-bound**, and the temporal distribution of contexts—which individuals cannot control—determines whether coordination is structurally possible.
 
-**Windows:**
-```bash
-Double-click start.bat
+The model reveals three interconnected mechanisms: (1) **context-induced fragmentation** of We-frames, (2) **structural asymmetry** between competing climate paradigms (Green Growth vs Degrowth), and (3) **paradigm marginality**—the fact that most people, most of the time, are not thinking within climate frameworks at all.
+
+---
+
+## Research Question
+
+**Why does climate coordination remain elusive despite increasing awareness and concern?**
+
+Standard explanations focus on:
+- Individual motivation deficits
+- Information asymmetries
+- Free-rider problems
+- Coordination failures due to scale
+
+This simulation proposes a different explanation: **The Contextual Commons Dilemma**
+
+> Climate coordination requires sustained collective identity, but human cognition and social structures are fundamentally context-bound. The temporal distribution of contexts—which individuals cannot control—determines whether coordination is structurally possible.
+
+---
+
+## Theoretical Framework
+
+### The Three-Zone Spatial Model
+
+The simulation models social-cognitive space as dynamically divided into three zones:
+
+**1. Green Growth Exclusive Territory**
+- Represents the spatial presence of techno-optimistic, growth-compatible climate narratives
+- Dominant in mainstream contexts (workplace, consumption, policy)
+- High institutional backing, media presence, economic alignment
+
+**2. Degrowth Exclusive Territory**
+- Represents the spatial presence of limits-to-growth, sufficiency-oriented climate narratives
+- Strong only in niche contexts (academic, activist, crisis moments)
+- Low institutional support, politically marginalized
+
+**3. Unaligned Space**
+- **The critical insight**: This is the majority of cognitive/social space in most contexts
+- Represents people not thinking within climate paradigm frameworks
+- "Just living life" - work concerns, consumption decisions, daily routines
+- Climate paradigms are *absent*, not just *contested*
+
+### Why This Matters: Paradigm Marginality
+
+The key theoretical contribution is demonstrating that **Green Growth vs Degrowth is not the primary problem**. The primary problem is that **climate paradigms occupy minority mindshare** in the contexts where people spend most of their time.
+
+```
+Typical Space Distribution:
+
+Workplace Context:
+├─ Green Growth: 18%
+├─ Overlap: 1%
+├─ Degrowth: 2%
+└─ UNALIGNED: 79% ← Most people thinking about productivity, wages, NOT climate
+
+Shopping Context:
+├─ Green Growth: 14%
+├─ Overlap: 2%
+├─ Degrowth: 1%
+└─ UNALIGNED: 83% ← Most people thinking about price, convenience, NOT climate
+
+Climate Context (rare!):
+├─ Green Growth: 35%
+├─ Overlap: 15%
+├─ Degrowth: 25%
+└─ UNALIGNED: 25% ← Climate paradigms finally dominant
 ```
 
-**Mac/Linux:**
-```bash
-chmod +x start.sh
-./start.sh
-```
+---
 
-### Option 2: Manual HTTP Server
+## Design Rationale: Why These Choices?
 
-1. Open terminal in this directory
-2. Run one of these commands:
-   - Python 3: `python -m http.server 8000`
-   - Python 2: `python -m SimpleHTTPServer 8000`
-   - Node.js: `npx http-server -p 8000`
-   - PHP: `php -S localhost:8000`
+### 1. Dynamic Spatial Zones (Not Fixed Ideologies)
 
-3. Open `http://localhost:8000` in your browser
+**Design Choice**: Attractors with variable spatial radius, not static identity markers
 
-### Option 3: Direct File Opening
+**Rationale**:
+- Climate paradigms are not internal belief states—they are **context-activated frames**
+- The same person can think "green tech will save us" at work and "I need cheap groceries" while shopping
+- Spatial representation reveals **structural advantage**: Green Growth occupies more space in more contexts
 
-Simply open `index.html` in a modern web browser (Chrome, Firefox, Safari, Edge)
+**Alternative Rejected**: Fixed agent identities (e.g., "agent is Green Growth believer") would miss context-dependency
+
+### 2. Unaligned Space as Default Background
+
+**Design Choice**: Gray background covering canvas, opacity scales with unaligned %
+
+**Rationale**:
+- Makes **absence** visible—the default state is not "contested" but "absent"
+- When 75% of space is gray in Workplace Context, it viscerally shows: climate paradigms are marginal here
+- **Theoretical point**: The problem isn't just GG vs DG conflict—it's that climate doesn't occupy enough mindshare
+
+**Alternative Rejected**: Showing only GG/DG territories would make it seem like everyone is always in climate frame, just divided
+
+### 3. Context-Dependent Overlap Zones
+
+**Design Choice**: Overlap varies by context (5% workplace, 35% community)
+
+**Rationale**:
+- **Convergence is structurally context-dependent**
+- In workplace: GG (green jobs) vs DG (job reduction) are incompatible → minimal overlap
+- In community: Both support local initiatives → higher overlap (though for different reasons)
+- Shows why paradigm debates are often "talking past each other"—they occur in contexts where overlap is structurally minimal
+
+**Alternative Rejected**: Fixed overlap % would miss that some contexts enable dialogue, others prevent it
+
+### 4. Asymmetric Attractor Sizes
+
+**Design Choice**: Green Growth 8-75% size, Degrowth 2-55% size across contexts
+
+**Rationale**:
+- **Not a symmetric competition**—GG has structural advantages
+- GG present in ALL contexts (even if weak), DG almost invisible in workplace/shopping
+- Represents institutional backing, media normalization, economic alignment
+- **Key insight**: Hegemony is not "winning the debate"—it's "being present where the debate isn't even happening"
+
+**Alternative Rejected**: Equal-sized attractors would suggest a "level playing field" that doesn't exist
+
+### 5. Temporal Frequency Distribution
+
+**Design Choice**: Workplace 30%, Shopping 40%, Climate Context 15%
+
+**Rationale**:
+- **Time spent in contexts is not individually controllable**
+- People don't choose to spend 70% of time in climate-negative contexts—that's structural
+- Rare climate contexts mean GG/DG can't sustain dialogue or convergence
+- **Intervention insight**: Changing paradigm strength won't help if context distribution doesn't change
+
+**Alternative Rejected**: Equal time in all contexts would miss the core mechanism—temporal asymmetry
 
 ---
 
-## Visual Elements Guide
+## Visual Grammar: Reading the Simulation
 
-### Canvas Main Display
+### Color Coding
 
-#### 1. Background Color
-- **Red tones** → Climate-negative contexts (Shopping, Workplace)
-- **Green tones** → Climate-positive contexts (Community Meeting, Climate Context)
-- **Color intensity** → Reflects the context's climate compatibility level
-- **Color gradients** → Smooth transitions when contexts switch
+| Element | Color | Meaning |
+|---------|-------|---------|
+| **Gray overlay** | Light gray, variable opacity | Unaligned space—people NOT in climate paradigm frame |
+| **Blue gradient** | Light blue (#508CFF) | Green Growth influence territory |
+| **Green gradient** | Light green (#50DC8C) | Degrowth influence territory |
+| **Purple blend** | Blue+Green mix | Overlap zone—where paradigms coexist |
+| **Context banner** | Red or Green tones | Climate compatibility of current context |
 
-#### 2. Top Banner
-- **Context Name**: Current social context (highlighted in context color)
-- **Frame Logic**: Dominant framing logic in this context (e.g., "cheap goods, convenience")
+### Agent Appearance
 
-#### 3. Agents (Dots)
+| Visual Feature | Meaning |
+|----------------|---------|
+| **Dot color** | Paradigm alignment: Blue (GG), Green (DG), Gray (Undecided) |
+| **Dot brightness** | Climate commitment level (brighter = higher commitment) |
+| **Dot size** | We-frame centrality (larger = more connections in current context) |
+| **White lines** | Active We-frame connections (appear/disappear with context) |
 
-**Color Meanings:**
-- 🔵 **Blue** = Green Growth believers
-- 🟢 **Green** = Degrowth believers
-- ⚪ **Gray** = Undecided
+### Spatial Dynamics
 
-**Brightness:**
-- **Dim** = Low climate commitment
-- **Bright** = High climate commitment
-- Brightest agents represent high climate commitment levels
-
-**Size:**
-- **Small dots** = Isolated agents with few connections
-- **Large dots** = Central agents with many We-frame connections
-- Size reflects the agent's "We-frame centrality" in current context
-
-**White Highlight:**
-- Appears when agent's climate commitment > 70%
-
-#### 4. Connection Lines (We-Frames)
-- **White thin lines** = We-frame connections
-- Connect two agents who are "compatible" in the current context
-- **Lines appearing/disappearing** → Formation and dissolution of We-frames
-- **Line density** → Collective cohesion in current context
-- Lines change dynamically with context switches
-
-#### 5. Attractors (Glowing Circles)
-
-**Green Growth Attractor (Left side):**
-- 🔵 Blue halo
-- Strongest in Workplace Context (work contexts reinforce tech/economic growth narratives)
-- Attracts blue agents to cluster leftward
-
-**Degrowth Attractor (Right side):**
-- 🟢 Green halo
-- Strongest in Climate Context (climate contexts reinforce ecological/degrowth narratives)
-- Attracts green agents to cluster rightward
-
-**Pulsing Effect:**
-- Attractors pulse gently, more visible when stronger
-- When attractor strength = 0 in current context, it completely disappears
-
-#### 6. Climate Shock Event
-- **Red pulsing border** → Climate shock event in progress
-- **Top red text**: "CLIMATE SHOCK EVENT"
-- Forces all agents into Climate Context temporarily
+**When context switches, watch:**
+1. **Gray overlay changes opacity** → Unaligned space expanding/contracting
+2. **Attractors pulse and resize** → Paradigm territories growing/shrinking
+3. **Agent clusters dissolve/reform** → We-frames fragmenting
+4. **Connections flash in/out** → Collective identity unstable
 
 ---
 
-### Right Control Panel
+## Key Phenomena: What the Simulation Reveals
 
-#### Live Metrics
+### Phenomenon 1: Paradigm Marginality in Mainstream Contexts
 
-1. **Current Context**
-   - Current context name (displayed in context color)
-   - Frame Logic description
-   - Progress bar showing time remaining in this context
+**Observable**: In Workplace/Shopping contexts, gray "UNALIGNED SPACE" text appears prominently
 
-2. **Climate Impact**
-   - Current context's impact on climate
-   - 🟢 Positive numbers = Climate-positive (+60%, +100%)
-   - 🔴 Negative numbers = Climate-negative (-30%, -50%)
+**Mechanism**:
+- Climate Paradigm Space metric drops to 20-25% (red warning)
+- Unaligned Space metric jumps to 75-80% (red, enlarged)
+- Most agents cluster based on non-climate logics (work teams, consumption preferences)
 
-3. **Avg Climate Commitment**
-   - Average climate commitment across all agents
-   - Progress bar: Green fill shows overall commitment level
-   - Percentage: 0-100%
+**Theoretical Insight**:
+Climate coordination fails not because people disagree on solutions, but because **climate is not a salient frame** in contexts where people spend most time.
 
-4. **Active We-Frames**
-   - Number of currently active We-frame connections
-   - Higher number = Stronger collective cohesion
+### Phenomenon 2: Context-Induced Hegemony
 
-5. **Climate-aligned**
-   - Number of agents with high climate commitment (>60%) AND strong We-frame connections (>2)
-   - Measures true "climate actors"
+**Observable**: In Workplace Context, Green Growth zone expands to 55% while Degrowth shrinks to 2%
 
-6. **Paradigm Distribution**
-   - Three-color bar chart:
-     - 🔵 Blue = Green Growth agents count
-     - 🟢 Green = Degrowth agents count
-     - ⚪ Gray = Undecided agents count
-   - Specific numbers shown below (GG: X, DG: Y, Un: Z)
+**Mechanism**:
+- GG benefits from "green jobs," "innovation," "competitiveness" narratives—all workplace-aligned
+- DG message ("reduce production") is structurally incompatible with workplace frame
+- Degrowth believers feel **isolated and outnumbered**, not because of debate loss, but structural squeeze
 
-7. **Climate Coordination Goal**
-   - Progress bar: Gradient from red (0%) to green (100%)
-   - Percentage: Overall climate coordination progress
-   - Status messages:
-     - "Fragmented - No coordination" < 20%
-     - "Partial coordination emerging" 20-50%
-     - "Strong coordination building" 50-80%
-     - "Near-complete coordination!" > 80%
-   - This metric combines: climate context frequency, average commitment, We-frame connectivity
+**Theoretical Insight**:
+Green Growth hegemony is not ideological victory—it's **structural congruence** with dominant contexts. Degrowth struggles not because arguments are weak, but because it lacks resonance in contexts that dominate temporal distribution.
 
----
+### Phenomenon 3: Rare Moments of Contestation
 
-## Interactive Controls
+**Observable**: In Climate Context, both zones expand, Overlap reaches 15%, gray recedes to 25%
 
-### Sliders
+**Mechanism**:
+- Climate paradigms suddenly occupy majority mindshare
+- GG and DG believers can actually engage—there's overlap space for dialogue
+- This is when debate, convergence, coalition-building become possible
 
-1. **Climate Context Frequency** (5% - 40%, default: 15%)
-   - Adjusts how often the climate context appears
-   - Higher values = More frequent climate contexts
-   - **Experiment**: Try increasing to 30-40% and observe improved coordination
-   - **Key insight**: Shows that coordination *is* possible with sufficient climate context time
+**But**: Context is brief (30 frames) and rare (15% frequency). Before meaningful convergence, context switches.
 
-2. **Frame Inertia** (0% - 100%, default: 30%)
-   - Controls how quickly agents switch between frames
-   - Higher values = Agents maintain previous connections longer even when context changes
-   - Low inertia = Rapid, complete frame switching (realistic)
-   - High inertia = "Sticky" connections that persist across contexts (idealistic)
-   - **Experiment**: Try 80%+ to see what happens if people maintained climate frames across contexts
+**Theoretical Insight**:
+Convergence is not impossible—it's **structurally time-constrained**. The problem isn't that paradigms *can't* align, but that contexts enabling alignment are too rare.
 
-3. **Green Growth Strength** (0% - 100%, default: 60%)
-   - Adjusts the pull of the Green Growth attractor
-   - Controls how strongly technology/growth narratives attract agents
-   - **Experiment**: Set to 100% to see Green Growth dominance
-   - Set to 0% to remove Green Growth influence entirely
+### Phenomenon 4: Cumulative Exposure Asymmetry
 
-4. **Degrowth Strength** (0% - 100%, default: 60%)
-   - Adjusts the pull of the Degrowth attractor
-   - Controls how strongly ecological/degrowth narratives attract agents
-   - **Experiment**: Set to 100% to see Degrowth dominance
-   - Compare different strength combinations to see paradigm competition
+**Observable**: Exposure Ratio metric climbs to 2.5x, 3x, 4x over time (turns red)
 
-### Buttons
+**Mechanism**:
+- Green Growth accumulates exposure time: 60% × 30% (workplace) + 40% × 40% (shopping) + ...
+- Degrowth accumulates exposure time: 2% × 30% (workplace) + 1% × 40% (shopping) + ...
+- **Cumulative advantage**: GG gets ~3x more "mindshare time" than DG
 
-- **Trigger Climate Shock**: Forces all agents into Climate Context for 3 seconds
-  - Simulates a major climate disaster (e.g., extreme weather event)
-  - Observe: Temporary mobilization followed by rapid dissolution
-  - Shows how shock events rarely lead to sustained coordination
+**Theoretical Insight**:
+This is **reproduction asymmetry**. New recruits from unaligned space encounter GG 3x more often than DG. Even if conversion rates were equal, GG would grow faster simply due to visibility.
 
-- **Reset Simulation**: Restarts with randomized agent positions and fresh state
-  - Use to test different parameter combinations
-  - Each reset creates slightly different initial conditions
+### Phenomenon 5: We-Frame Instability Across Contexts
 
-### Keyboard Shortcuts
+**Observable**: Connection lines flash in/out, agent clusters dissolve/reform every context switch
 
-- **`S`**: Trigger climate shock event
-- **`R`**: Reset simulation
-- **`Space`**: Pause/unpause (useful for examining specific moments)
+**Mechanism**:
+- In Workplace: Agents cluster by work teams, GG believers connect
+- In Shopping: Completely different topology, random clustering
+- In Climate: GG and DG believers separate into opposing camps
+
+**Theoretical Insight**:
+Climate coordination requires **cross-context identity persistence**, but We-frames are fundamentally context-bound. "Yesterday's climate allies" become "today's disconnected coworkers."
 
 ---
 
-## What to Observe
+## Metrics Dashboard: Interpretation Guide
 
-### 1. The Fragmentation Cycle
+### Climate Paradigm Space (Large centered metric)
 
-Watch the repeating pattern:
-- **Shopping/Workplace Contexts** (majority of time): Agents scatter, random clustering, climate commitment decays
-- **Climate Context** (rare, brief): Agents suddenly form climate We-frames, commitment starts rising
-- **Context Switch**: Everything dissolves, progress lost
+**What it shows**: % of cognitive/social space occupied by climate paradigms (GG + DG + Overlap)
 
-**Key observation**: Climate coordination *does* emerge when given the context, but it never lasts long enough.
+**Color coding**:
+- 🟢 Green (>60%): Climate paradigms dominant—rare, usually only in Climate Context
+- 🔵 Cyan (30-60%): Moderate presence—transitional moments
+- 🔴 Red (<30%): Climate paradigms marginal—typical in mainstream contexts
 
-### 2. Green Growth vs Degrowth Separation
+**Why it matters**: This is the **total capacity for climate-focused collective action**. If paradigm space is 25%, only 25% of agents can even engage in climate coordination.
 
-- In **Workplace Context**: Blue (Green Growth) agents cluster strongly (tech/growth narrative dominates work)
-- In **Climate Context**: Blue and Green agents separate into distinct camps
-- **Problem**: They're separated precisely when they should be coordinating
-- Neither paradigm "wins" - they just oscillate without resolution
+### Unaligned Space (Large gray metric below)
 
-### 3. Climate Commitment Dynamics
+**What it shows**: % of space where people are NOT thinking in climate paradigm terms
 
-Watch the "Avg Climate Commitment" metric:
-- **Saw-tooth pattern**: Brief spikes during climate contexts, long decay periods
-- **Never stabilizes**: Commitment can't accumulate because climate contexts are too infrequent
-- **Individual variation**: Some agents (brightest dots) maintain high commitment, but they're isolated
+**Color coding**:
+- 🔴 Red, enlarged (>50%): Majority unaligned—climate marginalized
+- Gray, normal size (<50%): Minority unaligned—climate salient
 
-### 4. We-Frame Dissolution
+**Why it matters**: This is the **structural barrier to recruitment**. To mobilize climate action, people must first *enter* paradigm space—but most contexts don't facilitate this.
 
-Pay attention to the connection lines:
-- **Rapid appearance/disappearance**: We-frames form and dissolve completely with each context switch
-- **Different topologies**: Completely different network structures in different contexts
-- **No persistence**: Yesterday's climate allies are today's disconnected consumers
+### Spatial Territory Occupation
 
-### 5. The Coordination Goal
+**GG Territory %** vs **DG Territory %**
 
-Watch the "Climate Coordination Goal" progress bar:
-- **Typical pattern**: Stalls around 10-20%, occasionally spikes to 30-40%, then crashes
-- **What success looks like**: Sustained progress above 60% (almost never happens with default settings)
-- **The frustration**: You can see it *almost* working, then context switches destroy progress
+**Why it matters**: Shows the **spatial asymmetry**. Even when both paradigms are present, GG typically occupies 3-10x more territory. This is not "debate dominance"—it's structural presence.
+
+### Agents in Zones
+
+**GG Zone / DG Zone / Contested**
+
+**Why it matters**:
+- High "Contested" count → Overlap zone is active, dialogue possible
+- Low "Contested" count → Paradigms spatially separated, talking past each other
+
+### Cumulative Exposure Ratio
+
+**What it shows**: Total GG exposure time ÷ Total DG exposure time
+
+**Why it matters**:
+- Ratio > 2.0 (turns red) → GG has >2x visibility advantage
+- This compounds over time—structural advantage accumulates
+- Explains paradigm reproduction asymmetry
+
+### Paradigm Distribution Breakdown
+
+**GG Exclusive / Overlap / DG Exclusive**
+
+**Why it matters**:
+- Low Overlap (1-5%) in Workplace → Convergence structurally blocked
+- Higher Overlap (15-35%) in Community → Dialogue space exists
+- Shows **where** convergence might be possible
 
 ---
 
-## Experimental Scenarios
+## Experimental Scenarios: Using the Controls
 
-### Experiment 1: Increase Climate Context Frequency
+### Experiment 1: Increase Climate Context Frequency (Slider: 15% → 35%)
 
-**Setup**: Move "Climate Context Frequency" slider to 35-40%
+**What happens**:
+- Climate Paradigm Space sustains at 60-70%
+- Climate Coordination Goal reaches 70-80%
+- Unaligned Space drops to 30-40%
+- GG and DG zones interact more, Overlap becomes visible
 
-**Observe**:
-- Climate Coordination Goal now reaches 60-80%
-- Average commitment stabilizes at higher levels
-- Climate We-frames persist longer
-- Green Growth and Degrowth actually start to interact/converge
+**Theoretical Point**:
+Coordination IS structurally possible—but requires transforming context distribution. This is **not individually achievable**. You cannot decide to spend 35% of your time in "climate context"—that's determined by institutions, media, policy, economic organization.
 
-**Insight**: Coordination is **structurally possible** but requires transforming the context distribution - something individuals can't do alone.
+**Implication**:
+The solution is not "try harder to care"—it's **structural transformation** of temporal context distribution.
 
-### Experiment 2: High Frame Inertia
+### Experiment 2: High Frame Inertia (Slider: 30% → 90%)
 
-**Setup**: Set "Frame Inertia" to 80-90%
-
-**Observe**:
-- Connections persist across context switches
-- Agents maintain "memory" of previous We-frames
+**What happens**:
+- We-frame connections persist across context switches
+- Climate Commitment decays slower
 - Coordination improves even with low climate context frequency
 
-**Insight**: If people could maintain climate frames across contexts (work, shopping, etc.), coordination would improve. But cognitively, we're fundamentally context-bound.
+**Theoretical Point**:
+If people could maintain climate frames across contexts (work, shopping, leisure), coordination would work. But **cognitively, we're context-bound**. Frame inertia is not a parameter we can voluntarily increase.
 
-### Experiment 3: Paradigm Strength Asymmetry
+**Implication**:
+This is a **counterfactual experiment**—shows what *would* happen if cognition worked differently. Highlights that the problem is cognitive architecture + social structure interaction.
 
-**Setup**: Set Green Growth Strength to 100%, Degrowth Strength to 20%
+### Experiment 3: Paradigm Strength Asymmetry (GG: 100%, DG: 20%)
 
-**Observe**:
-- Blue agents dominate clustering
-- Green agents become marginalized
-- Reflects real-world dynamics where growth narratives dominate institutional contexts
+**What happens**:
+- GG zone expands massively in all contexts
+- DG zone almost disappears
+- Mimics real-world institutional asymmetry
 
-**Try the reverse** (GG: 20%, DG: 100%):
-- Degrowth dominates in climate contexts
-- But lacks influence in workplace/consumer contexts
-- Shows why counter-hegemonic narratives struggle
+**Theoretical Point**:
+This recreates the **actual structural conditions**. Green Growth has institutional backing, media normalization, economic alignment. Degrowth does not. The simulation shows the spatial consequences.
 
-### Experiment 4: Climate Shock Events
+**Implication**:
+Paradigm strength is not "better arguments"—it's structural support. Changing DG's strength requires institutional change, not better rhetoric.
 
-**Setup**: Click "Trigger Climate Shock" several times during the simulation
+### Experiment 4: Trigger Climate Shock (Button)
 
-**Observe**:
-- Temporary spike in coordination during shock
-- Rapid dissolution after shock ends
-- Each shock creates briefer "afterglow" of elevated commitment
+**What happens**:
+- Forced 3-second Climate Context
+- Coordination spikes, Paradigm Space jumps to 75%
+- After shock ends, rapid dissolution back to fragmentation
 
-**Insight**: Shock-driven mobilization is temporary unless followed by sustained context change.
+**Theoretical Point**:
+**Shock-driven mobilization is inherently unstable**. Without sustained context transformation, the temporary alignment evaporates. This explains why climate disasters produce brief mobilization spikes but no lasting coordination.
+
+**Implication**:
+Crisis mobilization ≠ sustained transformation. Shocks can catalyze change only if followed by institutional restructuring of context distribution.
 
 ---
 
 ## The Core Theoretical Insight
 
-This simulation demonstrates the **Contextual Commons Dilemma**:
+### The Contextual Commons Dilemma
 
-> Climate coordination requires sustained collective identity, but human cognition and social structures are fundamentally context-bound. The temporal distribution of contexts - which individuals cannot control - determines whether coordination is structurally possible.
+Climate coordination requires sustained collective identity, but:
 
-**Three key mechanisms:**
+1. **Cognitive constraint**: Humans are context-bound thinkers. We-frames fragment across contexts.
 
-1. **Context-dependent framing**: The same individuals adopt different frames (consumer, worker, citizen, activist) in different contexts
-2. **Asymmetric temporal distribution**: Climate-negative contexts (work, consumption) dominate time; climate-positive contexts are rare
-3. **Frame-strategy asynchrony**: Even when individuals care, their capacity for collective action depends on being in the same context simultaneously
+2. **Temporal constraint**: Context distribution is not individually controllable. We don't choose to spend 70% of time in climate-negative contexts.
 
-**The experiment proves**: Increase climate context frequency to 35%+, and coordination emerges. But this parameter is not individually controllable - it's determined by institutional structures, media attention, policy frameworks, and economic organization.
+3. **Spatial constraint**: Climate paradigms occupy minority mindshare in contexts dominating temporal distribution.
 
----
+4. **Structural asymmetry**: Green Growth benefits from congruence with dominant contexts. Degrowth does not.
 
-## Presentation Narrative for Demonstrations
+**The coordination failure is not motivational—it's architectural.**
 
-### Opening (30 seconds)
+### Implications for Climate Strategy
 
-*"This simulation demonstrates why climate coordination is so difficult - not because people don't care, but because their collective identity is fragmented across contexts."*
+**What won't work**:
+- Individual behavior change (doesn't address context distribution)
+- Better climate communication (unaligned space is the problem, not misinformation)
+- Paradigm debate resolution (GG vs DG is not the main barrier)
 
-*"Watch these 50 agents. They represent people with different climate paradigms: Blue are Green Growth believers (technology, efficiency), Green are Degrowth believers (ecological limits, sufficiency), and Gray are undecided."*
+**What might work**:
+- **Institutional transformation** of context distribution
+  - Climate integration into workplace contexts (not just "green jobs" but "climate-centered work frames")
+  - Economic restructuring so consumption contexts include climate frames by default
 
-### Running the Default Simulation (1-2 minutes)
+- **Cross-context frame persistence mechanisms**
+  - Social structures that maintain climate identity across contexts
+  - "Climate citizenship" as a role that transcends specific contexts
 
-*"Notice the background color changes - red tones are climate-negative contexts like shopping and work, green tones are climate-positive contexts like community meetings and climate discussions."*
-
-*"See how agents cluster differently in each context? In the workplace [point to screen when it happens], Green Growth believers cluster strongly - the tech/growth narrative dominates. In shopping contexts, clustering is almost random - just consumption preferences."*
-
-*"Now watch what happens when we briefly enter Climate Context [wait for it]... THERE! Suddenly, agents form climate We-frames, those white connection lines. Blue and Green separate into paradigmatic camps. Climate commitment starts rising."*
-
-*"But look - [context switches] - it's gone. Back to shopping. All those connections dissolve. The commitment that was building... decaying. This cycle repeats endlessly."*
-
-### Highlighting the Problem (1 minute)
-
-*"See the 'Climate Coordination Goal' on the right? It keeps starting to rise, then crashing. That's the fundamental problem: climate contexts are too rare and too brief for stable coordination to emerge."*
-
-*"And notice the Green Growth vs Degrowth separation? They're divided precisely when they should be coordinating. There's not enough 'climate context time' for these paradigms to engage, debate, and potentially converge."*
-
-### The Intervention Experiment (1-2 minutes)
-
-*"Now, let me show you something important. I'm going to increase the Climate Context Frequency from 15% to 35%."*
-
-*[Move slider, wait 10-15 seconds]*
-
-*"Look at that! Coordination is actually emerging now. The Climate Goal is rising to 60%, 70%. Climate commitment is stabilizing. Green Growth and Degrowth agents are interacting more, starting to form mixed clusters."*
-
-*"This proves coordination IS structurally possible - but here's the critical insight: We can't simply 'increase climate context frequency' in real life. That frequency is determined by institutional structures, media cycles, economic organization - things beyond individual control."*
-
-### Alternative Experiments (optional, 30 seconds each)
-
-**Frame Inertia:**
-*"What if people could maintain climate frames across contexts? [Increase Frame Inertia to 90%] See, coordination improves even with low climate context frequency. But cognitively, we're not wired this way - context switches really do fragment our frames."*
-
-**Climate Shock:**
-*"What about crisis events? [Trigger Climate Shock] Here's a climate disaster forcing everyone into climate context. Yes, there's temporary mobilization... and [wait for it to end] ...it evaporates the moment the shock ends. Shock-driven mobilization is inherently unstable."*
-
-### Conclusion (30 seconds)
-
-*"This is the Contextual Commons Dilemma: We need cross-context collective identity for climate coordination, but human cognition and social structures are fundamentally context-bound."*
-
-*"The implication isn't despair - it's strategic clarity. If we want climate coordination, we need to transform the temporal distribution of contexts through institutional change, not just rely on individual commitment."*
-
-*"Questions?"*
+- **Expanding paradigm space, not just shifting within it**
+  - Goal: Reduce unaligned space from 75% to 40%
+  - This is more important than resolving GG vs DG
 
 ---
 
-## Technical Details
+## How to Access the Simulation
 
-### Architecture
+**Web Access**: Open `index.html` in a modern web browser (Chrome, Firefox, Safari, Edge recommended)
 
-- **Framework**: p5.js (JavaScript creative coding library)
-- **Model Type**: Agent-based simulation with force-directed layout
-- **Update Rate**: 60 FPS
-- **Agent Count**: 50 (configurable in `sketch.js`)
-- **Canvas Size**: 900x600 pixels
+**Local Server** (if direct file opening doesn't work):
+- Windows: Double-click `start.bat`
+- Mac/Linux: Run `./start.sh` in terminal
+- Or manually: `python -m http.server 8000` then open `http://localhost:8000`
 
-### Core Mechanisms
-
-**1. Agent Dynamics**
-- Each agent has position, velocity, acceleration (Newtonian physics)
-- Three identity types: Green Growth (35%), Degrowth (35%), Undecided (30%)
-- Climate commitment: Continuous variable [0,1] that accumulates/decays based on context
-- We-frame connections: Dynamic network edges based on context compatibility
-
-**2. Force Calculations**
-- **Separation**: Avoid crowding (inverse distance weighting)
-- **Alignment**: Match velocity of nearby compatible agents
-- **Cohesion**: Attraction to compatible agents based on context logic
-- **Attractor forces**: Paradigm-specific pull based on context strength
-- **Boundary forces**: Soft walls to keep agents on screen
-
-**3. Context System**
-- Four contexts with different durations, frequencies, and climate compatibility
-- Weighted random selection based on frequency distribution
-- Smooth color transitions (30-frame interpolation)
-- Climate shock override mechanism
-
-**4. Climate Commitment Dynamics**
-```
-If climate_compatibility > 0:
-    commitment += climate_compatibility × 0.008 × dt
-    commitment += 0.002 × dt (if strong We-frames)
-Else:
-    commitment *= 0.995 (exponential decay)
-```
-
-**5. Context Compatibility Logic**
-- **Shopping**: Random clustering (consumption preferences)
-- **Workplace**: Green Growth highly compatible, others moderate
-- **Community**: Climate commitment drives compatibility
-- **Climate**: Same paradigm attracts (0.9), different paradigms repel (-0.3)
-- **Frame Inertia**: Bonus compatibility for previous connections
-
-### File Structure
-
-```
-weFrameSimulation/
-├── index.html          # Main HTML structure, metrics display
-├── style.css           # Styling for UI and metrics panels
-├── sketch.js           # p5.js main loop, setup, and display functions
-├── agent.js            # Agent class: behavior, forces, We-frames (10.9 KB)
-├── context.js          # Context definitions and switching logic (5.9 KB)
-├── attractor.js        # Green Growth/Degrowth attractors (4.9 KB)
-├── ui.js               # Dashboard, controls, climate goal (12 KB)
-├── utils.js            # Vector2D class and helper functions (2.3 KB)
-├── start.bat           # Windows launch script
-├── start.sh            # Mac/Linux launch script
-└── README.md           # This file
-```
-
-### Key Parameters (configurable in code)
-
-| Parameter | Location | Default | Description |
-|-----------|----------|---------|-------------|
-| `NUM_AGENTS` | sketch.js:14 | 50 | Number of agents |
-| `CANVAS_WIDTH` | sketch.js:12 | 900 | Canvas width in pixels |
-| `CANVAS_HEIGHT` | sketch.js:13 | 600 | Canvas height in pixels |
-| Context durations | context.js:26-58 | Varies | Frames each context lasts |
-| Context frequencies | context.js:26-58 | Varies | Probability weights |
-| Climate compatibility | context.js:26-58 | -0.5 to 1.0 | Climate impact of contexts |
-| Commitment accumulation | agent.js:262 | 0.008 | Rate of commitment increase |
-| Commitment decay | agent.js:268 | 0.995 | Exponential decay multiplier |
-
-### Performance
-
-- Runs at stable 60 FPS on modern browsers
-- O(n²) force calculations (acceptable for n=50)
-- No GPU acceleration required
-- Total file size: ~45 KB (excluding p5.js CDN)
-
-### Browser Compatibility
-
-- ✅ Chrome/Edge (recommended)
-- ✅ Firefox
-- ✅ Safari
-- ⚠️ Mobile browsers (works but small screen limits visibility)
-
-### Extending the Simulation
-
-**Add a new context:**
-1. Edit `context.js`, add new Context object in `initializeContexts()`
-2. Define compatibility logic in `agent.js`, `calculateContextCompatibility()`
-3. Optionally add attractor behavior in `attractor.js`
-
-**Modify agent behavior:**
-1. Edit force weights in `agent.js`, `calculateSocialForce()`
-2. Adjust commitment dynamics in `updateClimateCommitment()`
-3. Change clustering thresholds in `updateWeFrameConnections()`
-
-**Change visual appearance:**
-1. Colors: Edit hex values in `context.js` and `attractor.js`
-2. Agent size/appearance: Modify `agent.js`, `display()`
-3. UI styling: Edit `style.css`
+**Keyboard Shortcuts**:
+- `S`: Trigger climate shock event
+- `R`: Reset simulation
+- `Space`: Pause/unpause
 
 ---
 
-## Troubleshooting
+## For Further Discussion
 
-**Problem**: Simulation runs slowly or stutters
-- **Solution**: Reduce `NUM_AGENTS` in `sketch.js` to 30-40
+This simulation is a **computational thought experiment**, not an empirical model. It makes visible the structural mechanisms that are invisible in standard climate discourse.
 
-**Problem**: Agents cluster too tightly or too loosely
-- **Solution**: Adjust separation/cohesion force multipliers in `agent.js:147-165`
+The core claim: **Climate coordination failure is not a problem of insufficient care or information—it's a problem of context-bound cognition meeting asymmetric temporal distribution of contexts.**
 
-**Problem**: Climate coordination never happens
-- **Solution**: Increase climate context frequency or duration in `context.js`
-
-**Problem**: Can't see attractors
-- **Solution**: They only appear when strong in current context; wait for appropriate context or increase strength via sliders
-
-**Problem**: Metrics not updating
-- **Solution**: Check browser console for JavaScript errors; ensure all files are loaded
+Questions for discussion:
+1. If paradigm marginality (not paradigm conflict) is the core problem, what interventions does this suggest?
+2. How might we empirically measure "unaligned space" in real-world contexts?
+3. Can institutional design transform context distributions, or are they path-dependent?
+4. What would "cross-context climate citizenship" mechanisms look like?
 
 ---
-
-## Citations and References
-
-This simulation is a computational implementation of theoretical concepts from:
-
-- **We-mode reasoning**: Tuomela, R. (2013). *Social Ontology: Collective Intentionality and Group Agents*
-- **Frame analysis**: Goffman, E. (1974). *Frame Analysis: An Essay on the Organization of Experience*
-- **Context-dependent cognition**: Spillers & Unsworth (2011), context-dependent attention and memory
-- **Climate coordination failures**: Ostrom, E. (2010), polycentric governance and collective action
-- **Green Growth vs Degrowth debates**: Hickel & Kallis (2020), Jackson (2017)
-
-**Conceptual framework**: Contextual Commons Dilemma and We-frame fragmentation in climate coordination
-
----
-
-## License
-
-This simulation is provided for educational and research purposes. Feel free to modify and extend for your own research or teaching.
-
----
-
-## Contact and Feedback
-
-For questions, suggestions, or to report issues, please refer to your course instructor or research supervisor.
 
 **Version**: 1.0
 **Last Updated**: November 2024
+**Framework**: Contextual Commons Dilemma in Climate Coordination
+**Contact**: Refer to course instructor or research supervisor
